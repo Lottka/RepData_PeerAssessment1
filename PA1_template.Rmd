@@ -65,7 +65,7 @@ numNA <- sum(a)
 #calculating means for intervals
 int <- aggregate(data$steps, list(data$interval), mean, na.rm = T)
 
-#filling in missing data
+#filling in missing data with average numbers of steps per interval across all days
 data2 <- data
 data2$steps[a & data2$interval == int$Group.1] <- int[, 2]
 
