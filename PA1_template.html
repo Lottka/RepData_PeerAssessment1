@@ -123,7 +123,7 @@ numNA &lt;- sum(a)
 #calculating means for intervals
 int &lt;- aggregate(data$steps, list(data$interval), mean, na.rm = T)
 
-#filling in missing data
+#filling in missing data with average numbers of steps per interval across all days
 data2 &lt;- data
 data2$steps[a &amp; data2$interval == int$Group.1] &lt;- int[, 2]
 
