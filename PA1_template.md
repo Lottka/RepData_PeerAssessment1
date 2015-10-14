@@ -1,13 +1,9 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
-```{r}
+
+```r
 #loading and preparing data
 library(ggplot2)
 library(gridExtra)
@@ -18,7 +14,8 @@ data$date <- as.POSIXct(data$date)
 
 
 ## What is mean total number of steps taken per day?
-```{r}
+
+```r
 #calculating steps per day
 days <- aggregate(data$steps, list(data$date), sum)
 
@@ -34,13 +31,30 @@ median <- median(days$x)
 
 #presenting results
 hist
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+
+```r
 mean
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 median
+```
+
+```
+## [1] 10765
 ```
 
 
 ## What is the average daily activity pattern?
-```{r}
+
+```r
 #calculating steps per interval
 intervals <- aggregate(data$steps, list(data$interval), mean, na.rm = T)
 
@@ -52,12 +66,23 @@ maximum <-intervals[intervals$x==max(intervals$x),]
 
 #presenting results
 plot
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+
+```r
 maximum
+```
+
+```
+##     Group.1        x
+## 104     835 206.1698
 ```
 
 
 ## Imputing missing values
-```{r}
+
+```r
 #calculating number of missing values
 a <- is.na(data$steps)
 numNA <- sum(a)
@@ -79,15 +104,39 @@ median2 <- median(days2$x)
 
 #presenting results
 numNA
+```
+
+```
+## [1] 2304
+```
+
+```r
 hist2
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+
+```r
 mean2
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 median2
+```
+
+```
+## [1] 10766.19
 ```
 In this case histograms of daily activity look quite different after NA's were filled but it has no substantial impact on mean and median measurements.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r}
+
+```r
 #Adding factor variable for weekday/weekend
 data2$day <- weekdays(data2$date)
 data2$day[data2$day == "sobota" | data2$day == "niedziela"] <- "weekend"
@@ -101,3 +150,5 @@ weekdayPlot <- ggplot(weekday, aes(x=Group.1 ,y=x, color=x))+geom_line()+ylab("S
 weekendPlot <- ggplot(weekend, aes(x=Group.1 ,y=x, color=x))+geom_line()+ylab("Steps taken")+xlab("Hour")+theme(legend.position="none")+ggtitle("Weekends")
 grid.arrange(weekdayPlot, weekendPlot, nrow=2)
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
