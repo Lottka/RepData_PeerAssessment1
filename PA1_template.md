@@ -23,7 +23,7 @@ days <- aggregate(data$steps, list(data$date), sum)
 days <- na.omit(days)
 
 #histogram for steps per day
-hist <- ggplot(days,aes(x=Group.1 ,y=x, color=x))+geom_bar(stat='identity')+ylab("Steps taken")+xlab("Day")+theme(legend.position="none")
+hist <- ggplot(days,aes(x=x))+geom_histogram()+ylab("Steps taken")+xlab("Day")+theme(legend.position="none")
 
 #mean and median of steps per day
 mean <- mean(days$x)
@@ -31,6 +31,10 @@ median <- median(days$x)
 
 #presenting results
 hist
+```
+
+```
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
@@ -96,7 +100,7 @@ data2$steps[a & data2$interval == int$Group.1] <- int[, 2]
 
 #histogram for steps per day for new dataset
 days2 <-aggregate(data2$steps, list(data2$date), sum)
-hist2 <- ggplot(days2,aes(x=Group.1 ,y=x, color=x))+geom_bar(stat='identity')+ylab("Steps taken")+xlab("Day")+theme(legend.position="none")
+hist2 <- ggplot(days2,aes(x=x, color=x))+geom_histogram()+ylab("Steps taken")+xlab("Day")+theme(legend.position="none")
 
 #mean and median of steps per day for new dataset
 mean2 <- mean(days2$x)
@@ -112,6 +116,10 @@ numNA
 
 ```r
 hist2
+```
+
+```
+## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
